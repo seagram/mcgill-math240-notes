@@ -1,6 +1,4 @@
 #import "@preview/mousse-notes:1.1.0": *
-#import "@preview/cetz:0.5.2"
-#import "@preview/cetz-venn:0.2.0"
 #import "theme.typ": *
 
 #show: theme
@@ -253,7 +251,7 @@ $ A union B = { x in U | x in A "or" x in B "or both" } $
     $ B = {1,2,3} $
     $ A union B = {1,3,5, 2} $
   ][
-    #venn2-fig(a-fill: gray, b-fill: gray, ab-fill: gray)
+    #venn[A union B]
   ]
 ]
 
@@ -265,7 +263,7 @@ $ A inter B = { x in U | x in A "and" x in B } $
     $ B = {1,2,3} $
     $ A inter B = {1,3} $
   ][
-    #venn2-fig(ab-fill: gray)
+    #venn[A inter B]
   ]
 ]
 
@@ -282,8 +280,8 @@ $ A without B = {x in U | x in A "but" x in.not B} $
       columns: 2,
       column-gutter: 2em,
       align: center,
-      [$A without B$ \ #venn2-fig(a-fill: gray, length: 0.7cm)],
-      [$B without A$ \ #venn2-fig(b-fill: gray, length: 0.7cm)],
+      [#venn[A without B]],
+      [#venn[B without A]],
     )
   ]
 ]
@@ -297,20 +295,7 @@ $ overline(A) = {x in U | x in.not A} $
     $ overline(A) = {(-infinity, 1) union (1,3) union (3,5) union (5, infinity)} \
     "given" U = RR $
   ][
-    #align(center, cetz.canvas({
-      import cetz.draw: *
-      cetz-venn.venn2(
-        name: "venn",
-        fill: bg,
-        stroke: fg,
-        b-fill: gray,
-        not-ab-fill: gray,
-      )
-      content("venn.a", [$A$])
-      content("venn.b", [$B$])
-      content("venn.not-ab", [$U$])
-      content((rel: (0.6, 1.6), to: "venn.not-ab"), [$overline(A)$])
-    }))
+    #venn[overline(A)]
   ]
 ]
 
@@ -323,7 +308,7 @@ $ A triangle B = { x in U | x in A "or" x in B "but not both"} $
     $ B = {1,2,3} $
     $ A triangle B = {5, 2} $
   ][
-    #venn2-fig(a-fill: gray, b-fill: gray)
+    #venn[A triangle B]
   ]
 ]
 *_Note_*: This is the same as:
@@ -363,28 +348,8 @@ $ a dot (b+c) = (a dot b) + (a dot c) $
   columns: (auto, auto),
   column-gutter: 2em,
   align: center,
-  [
-    $ A union (B inter C) $
-    #venn3-fig(
-      a-fill: gray,
-      ab-fill: gray,
-      ac-fill: gray,
-      abc-fill: gray,
-      bc-fill: gray,
-      length: 0.7cm,
-    )
-  ],
-  [
-    $ (A union B) inter (A union C) $
-    #venn3-fig(
-      a-fill: gray,
-      ab-fill: gray,
-      ac-fill: gray,
-      abc-fill: gray,
-      bc-fill: gray,
-      length: 0.7cm,
-    )
-  ],
+  [#venn[A union (B inter C)]],
+  [#venn[(A union B) inter (A union C)]],
 ))
 #v(0.25cm)
 It is recommended exercise to prove the following identities with Venn diagrams in a similar fashion:

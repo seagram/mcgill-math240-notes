@@ -186,7 +186,7 @@
       str(it)
     } else if it.has("text") {
       it.text
-    } else if it.func() == space or it.func() == linebreak or it.func() == parbreak {
+    } else if it.func() == linebreak or it.func() == parbreak or repr(it.func()) == "space" {
       " "
     } else {
       let inner = if it.has("children") {
